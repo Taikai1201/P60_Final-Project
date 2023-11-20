@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#fff', // White background color
+    backgroundColor: '#fff', 
   },
   buttonContainer: {
     width: '80%',
@@ -97,6 +97,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   restaurantList: {
-    // Style your restaurant list as needed
+    // Style restaurant list as needed
   },
 });

@@ -1,4 +1,3 @@
-// AddRestaurant.js
 import React, { useState } from 'react';
 import {
   View,
@@ -17,8 +16,7 @@ export default function AddRestaurant({ navigation }) {
   const [restaurantPhoneNumber, setRestaurantPhoneNumber] = useState('');
   const [restaurantDetails, setRestaurantDetails] = useState('');
   const [restaurantTag, setRestaurantTag] = useState('');
-  const [rating, setRating] = useState('5.0'); // Default
-
+  const [rating, setRating] = useState('5.0'); 
   const handleAddRestaurant = () => {
     const newRestaurant = {
       name: restaurantName,
@@ -29,7 +27,6 @@ export default function AddRestaurant({ navigation }) {
       rating: rating,
     };
 
-    // Pass the new restaurant data back to the RestaurantList screen
     navigation.navigate('List of your restaurant', { newRestaurant });
   };
 
@@ -55,7 +52,7 @@ export default function AddRestaurant({ navigation }) {
         placeholder="Phone number"
         value={restaurantPhoneNumber}
         onChangeText={(text) => setRestaurantPhoneNumber(text)}
-        keyboardType="phone-pad" // Set the keyboard type to numeric
+        keyboardType="phone-pad" 
       />
       <TextInput
         style={styles.input}
@@ -78,7 +75,7 @@ export default function AddRestaurant({ navigation }) {
             { label: '4.0', value: '4.0' },
             { label: '3.5', value: '3.5' },
             { label: '3.0', value: '3.0' },
-            // ... add more options as needed
+            
           ]}
           onValueChange={(value) => setRating(value)}
           value={rating}
@@ -89,7 +86,7 @@ export default function AddRestaurant({ navigation }) {
       <TouchableHighlight
         style={styles.addButton}
         onPress={handleAddRestaurant}
-        underlayColor="#4682B4" // Stronger blue color when pressed
+        underlayColor="#4682B4" 
       >
         <Text style={styles.buttonText}>Add Restaurant</Text>
       </TouchableHighlight>

@@ -5,7 +5,6 @@ const dummyData = [
   { id: '1', name: 'Restaurant 1', rate: '3/5' },
   { id: '2', name: 'Restaurant 2', rate: '3.5/5' },
   { id: '3', name: 'Restaurant 3', rate: '4/5' },
-  // Add more dummy data as needed
 ];
 
 export default function RestaurantList({ route }) {
@@ -29,10 +28,10 @@ export default function RestaurantList({ route }) {
     <View style={styles.container}>
       <Text style={styles.header}>Restaurant List</Text>
       <FlatList
-        data={dummyData} // Change this to restaurantData if you want to use the updated data
+        data={dummyData} // Change this to restaurantData if needed
         keyExtractor={(item) => item.id}
         renderItem={renderRestaurantItem}
-        horizontal={false} // Display items vertically
+        horizontal={false} 
       />
     </View>
   );
@@ -49,11 +48,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   gridItem: {
-    backgroundColor: 'grey', // Example background color
+    backgroundColor: 'grey', 
     padding: 16,
     margin: 8,
     borderRadius: 8,
-    width: '90%', // Adjust the width as needed
+    width: '90%', 
   },
   name: {
     color: 'white',
