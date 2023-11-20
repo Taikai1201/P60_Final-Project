@@ -1,4 +1,4 @@
-//HomeScreen.js
+// HomeScreen.js
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
@@ -9,6 +9,11 @@ export default function HomeScreen({ navigation }) {
 
   const handleViewRestaurantList = () => {
     navigation.navigate('List of your restaurant');
+  };
+
+  // New function to navigate to the detail screen
+  const handleViewDetails = (restaurant) => {
+    navigation.navigate('Detail Restaurant', { restaurant });
   };
 
   return (
@@ -27,6 +32,20 @@ export default function HomeScreen({ navigation }) {
           <Text style={styles.buttonText}>View Restaurant List</Text>
         </TouchableOpacity>
       </View>
+
+      {/* Display a list of restaurants (replace this with your actual list) */}
+      <View style={styles.restaurantList}>
+        {/* <Text>Restaurant 1</Text> */}
+        {/* Add more restaurants as needed */}
+      </View>
+
+      {/* New button to view details */}
+      <TouchableOpacity
+        style={[styles.button, styles.viewDetailsButton]}
+        onPress={() => handleViewDetails({ name: 'Sample Restaurant' })}
+      >
+        <Text style={styles.buttonText}>Details of the restaurant</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -41,6 +60,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '80%',
+    marginBottom: 16,
   },
   button: {
     padding: 16,
@@ -50,14 +70,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   addButton: {
-    backgroundColor: '#808080', 
+    backgroundColor: '#808080',
   },
   viewButton: {
-    backgroundColor: '#808080', 
+    backgroundColor: '#808080',
+  },
+  viewDetailsButton: {
+    backgroundColor: '#808080',
   },
   buttonText: {
-    color: '#fff', 
+    color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  restaurantList: {
+    // Style your restaurant list as needed
   },
 });
