@@ -19,6 +19,9 @@ export default function AddRestaurant({ navigation }) {
     setRestaurantPhoneNumber('');
     setRestaurantDetails('');
     setRestaurantTag('');
+
+// Navigate to the home screen or any other screen
+  navigation.navigate('Home');
   };
 
   return (
