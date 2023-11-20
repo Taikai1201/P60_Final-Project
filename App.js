@@ -6,6 +6,7 @@ import RestaurantList from './screens/RestaurantList';
 import AddRestaurant from './screens/AddRestaurant';
 import HomeScreen from './screens/HomeScreen';
 import DetailRestaurant from './screens/DetailRestaurant';
+import TeamMembers from './screens/TeamMembers';
 
 const Stack = createStackNavigator();
 
@@ -22,7 +23,7 @@ const restaurantGuideHeaderStyles = {
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Home Screen">
         <Stack.Screen
           name="Home Screen"
           component={HomeScreen}
@@ -41,6 +42,11 @@ const App = () => {
         <Stack.Screen
           name="Detail Restaurant"
           component={DetailRestaurant}
+          options={restaurantGuideHeaderStyles}
+        />
+        <Stack.Screen
+          name="Team Members"
+          component={TeamMembers}
           options={restaurantGuideHeaderStyles}
         />
       </Stack.Navigator>

@@ -11,9 +11,12 @@ export default function HomeScreen({ navigation }) {
     navigation.navigate('List of your restaurant');
   };
 
-  // New function to navigate to the detail screen
   const handleViewDetails = (restaurant) => {
     navigation.navigate('Detail Restaurant', { restaurant });
+  };
+
+  const handleViewTeamMembers = () => {
+    navigation.navigate('Team Members');
   };
 
   return (
@@ -46,6 +49,14 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.buttonText}>Details of the restaurant</Text>
       </TouchableOpacity>
+
+      {/* New button to view team members */}
+      <TouchableOpacity
+        style={[styles.button, styles.viewTeamMembersButton]}
+        onPress={handleViewTeamMembers}
+      >
+        <Text style={styles.buttonText}>View Team Members</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -76,6 +87,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#808080',
   },
   viewDetailsButton: {
+    backgroundColor: '#808080',
+  },
+  viewTeamMembersButton: {
     backgroundColor: '#808080',
   },
   buttonText: {
