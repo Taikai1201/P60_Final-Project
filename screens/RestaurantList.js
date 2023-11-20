@@ -1,8 +1,14 @@
-// RestaurantList.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 
-const RestaurantList = ({ navigation, route }) => {
+const dummyData = [
+  { id: '1', name: 'Restaurant 1', rate: '3/5' },
+  { id: '2', name: 'Restaurant 2', rate: '3.5/5' },
+  { id: '3', name: 'Restaurant 3', rate: '4/5' },
+  // Add more dummy data as needed
+];
+
+export default function RestaurantList({ route }) {
   const [restaurantData, setRestaurantData] = useState([]);
 
   useEffect(() => {
@@ -12,48 +18,50 @@ const RestaurantList = ({ navigation, route }) => {
     }
   }, [route.params]);
 
+  const renderRestaurantItem = ({ item }) => (
+    <View style={styles.gridItem}>
+      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.rate}>Rate: {item.rate}</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Restaurant List</Text>
+      <Text style={styles.header}>Restaurant List</Text>
       <FlatList
-        data={restaurantData}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.itemContainer}
-            onPress={() =>
-              navigation.navigate('Detail Restaurant', {
-                restaurant: item,
-              })
-            }
-          >
-            <Text style={styles.itemText}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
+        data={dummyData} // Change this to restaurantData if you want to use the updated data
+        keyExtractor={(item) => item.id}
+        renderItem={renderRestaurantItem}
+        horizontal={false} // Display items vertically
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
   },
-  title: {
-    fontSize: 24,
+  header: {
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  itemContainer: {
-    padding: 16,
     marginBottom: 16,
-    borderRadius: 8,
-    backgroundColor: '#f2f2f2',
   },
-  itemText: {
+  gridItem: {
+    backgroundColor: 'grey', // Example background color
+    padding: 16,
+    margin: 8,
+    borderRadius: 8,
+    width: '90%', // Adjust the width as needed
+  },
+  name: {
+    color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
+  },
+  details: {
+    color: 'white',
+    fontSize: 14,
   },
 });
-
-export default RestaurantList;

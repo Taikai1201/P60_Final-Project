@@ -1,6 +1,15 @@
 // AddRestaurant.js
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import {
+  View,
+  TextInput,
+  TouchableHighlight,
+  Text,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+} from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
 export default function AddRestaurant({ navigation }) {
   const [restaurantName, setRestaurantName] = useState('');
@@ -8,20 +17,20 @@ export default function AddRestaurant({ navigation }) {
   const [restaurantPhoneNumber, setRestaurantPhoneNumber] = useState('');
   const [restaurantDetails, setRestaurantDetails] = useState('');
   const [restaurantTag, setRestaurantTag] = useState('');
+  const [rating, setRating] = useState('5.0'); // Default
 
   const handleAddRestaurant = () => {
-    // Handle adding the restaurant to your list or any other logic
-    // You can replace the following with your logic for storing the data
+    const newRestaurant = {
+      name: restaurantName,
+      address: restaurantAddress,
+      phoneNumber: restaurantPhoneNumber,
+      details: restaurantDetails,
+      tag: restaurantTag,
+      rating: rating,
+    };
 
-    // Clear the input fields
-    setRestaurantName('');
-    setRestaurantAddress('');
-    setRestaurantPhoneNumber('');
-    setRestaurantDetails('');
-    setRestaurantTag('');
-
-// Navigate to the home screen or any other screen
-  navigation.navigate('Home');
+    // Pass the new restaurant data back to the RestaurantList screen
+    navigation.navigate('List of your restaurant', { newRestaurant });
   };
 
   return (
@@ -31,44 +40,91 @@ export default function AddRestaurant({ navigation }) {
     >
       <TextInput
         style={styles.input}
-        placeholder="Name of restaurant"
+        placeholder="Name"
         value={restaurantName}
         onChangeText={(text) => setRestaurantName(text)}
       />
       <TextInput
         style={styles.input}
-        placeholder="Address of restaurant"
+        placeholder="Address"
         value={restaurantAddress}
         onChangeText={(text) => setRestaurantAddress(text)}
       />
       <TextInput
         style={styles.input}
-        placeholder="Phone number of restaurant"
+        placeholder="Phone number"
         value={restaurantPhoneNumber}
         onChangeText={(text) => setRestaurantPhoneNumber(text)}
         keyboardType="phone-pad" // Set the keyboard type to numeric
       />
       <TextInput
         style={styles.input}
-        placeholder="Add any details of restaurant"
+        placeholder="Details"
         value={restaurantDetails}
         onChangeText={(text) => setRestaurantDetails(text)}
         multiline
       />
       <TextInput
         style={styles.input}
-        placeholder="Add tag"
+        placeholder="Tag"
         value={restaurantTag}
         onChangeText={(text) => setRestaurantTag(text)}
       />
-      <Button title="Add Restaurant" onPress={handleAddRestaurant} />
-      <Button
-        title="Back to Home"
-        onPress={() => navigation.navigate('Home')}
-      />
+      <View style={styles.pickerContainer}>
+        <RNPickerSelect
+          items={[
+            { label: '5.0', value: '5.0' },
+            { label: '4.5', value: '4.5' },
+            { label: '4.0', value: '4.0' },
+            { label: '3.5', value: '3.5' },
+            { label: '3.0', value: '3.0' },
+            // ... add more options as needed
+          ]}
+          onValueChange={(value) => setRating(value)}
+          value={rating}
+          placeholder={{ label: 'Rate', value: null }}
+          style={pickerSelectStyles}
+        />
+      </View>
+      <TouchableHighlight
+        style={styles.addButton}
+        onPress={handleAddRestaurant}
+        underlayColor="#4682B4" // Stronger blue color when pressed
+      >
+        <Text style={styles.buttonText}>Add Restaurant</Text>
+      </TouchableHighlight>
     </KeyboardAvoidingView>
   );
 }
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingTop: 13,
+    paddingHorizontal: 75,
+    paddingBottom: 12,
+    borderColor: '#4682B4',
+    borderRadius: 8,
+    backgroundColor: '#4682B4',
+    color: 'white',
+    paddingRight: 30,
+    alignSelf: 'center',
+    width: '60%',
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingTop: 13,
+    paddingHorizontal: 75,
+    paddingBottom: 12,
+    borderColor: '#4682B4',
+    borderRadius: 8,
+    backgroundColor: '#4682B4',
+    color: 'white',
+    paddingRight: 30,
+    alignSelf: 'center',
+    width: '60%',
+  },
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -78,10 +134,29 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'blue', // Blue color for the border
-    borderWidth: 1,
-    marginBottom: 16, // Increased margin between input fields
-    paddingHorizontal: 8,
-    borderRadius: 8, // Border radius
+    borderColor: '#4682B4',
+    borderWidth: 2,
+    marginBottom: 16,
+    borderRadius: 8,
+    alignSelf: 'center',
+    width: '80%',
+  },
+  addButton: {
+    backgroundColor: 'black',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignSelf: 'center',
+    marginTop: 16,
+  },
+  pickerContainer: {
+    height: 40,
+    borderColor: '#4682B4',
+    marginBottom: 16,
+    borderRadius: 6
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: 'white',
   },
 });
