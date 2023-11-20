@@ -1,7 +1,6 @@
 // AddRestaurant.js
-
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 
 export default function AddRestaurant({ navigation }) {
   const [restaurantName, setRestaurantName] = useState('');
@@ -23,7 +22,10 @@ export default function AddRestaurant({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}
+    >
       <TextInput
         style={styles.input}
         placeholder="Name of restaurant"
@@ -61,7 +63,7 @@ export default function AddRestaurant({ navigation }) {
         title="Back to Home"
         onPress={() => navigation.navigate('Home')}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

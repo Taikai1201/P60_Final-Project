@@ -1,7 +1,8 @@
+// RestaurantList.js
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function RestaurantList({ route }) {
+const RestaurantList = ({ navigation, route }) => {
   const [restaurantData, setRestaurantData] = useState([]);
 
   useEffect(() => {
@@ -12,17 +13,47 @@ export default function RestaurantList({ route }) {
   }, [route.params]);
 
   return (
-    <View>
-      <Text>Restaurant List</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Restaurant List</Text>
       <FlatList
         data={restaurantData}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <View>
-            <Text>{item}</Text>
-          </View>
+          <TouchableOpacity
+            style={styles.itemContainer}
+            onPress={() =>
+              navigation.navigate('Detail Restaurant', {
+                restaurant: item,
+              })
+            }
+          >
+            <Text style={styles.itemText}>{item.name}</Text>
+          </TouchableOpacity>
         )}
       />
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  itemContainer: {
+    padding: 16,
+    marginBottom: 16,
+    borderRadius: 8,
+    backgroundColor: '#f2f2f2',
+  },
+  itemText: {
+    fontSize: 16,
+  },
+});
+
+export default RestaurantList;
