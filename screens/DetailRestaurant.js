@@ -1,5 +1,5 @@
-
 import React from 'react';
+import * as Sharing from 'expo-sharing';
 import { View, Text, ScrollView, Button, StyleSheet } from 'react-native';
 
 const DetailRestaurant = ({ route }) => {
@@ -9,12 +9,40 @@ const DetailRestaurant = ({ route }) => {
     phoneNumber,
     details,
     tag,
+    rating, 
   } = route.params.restaurant;
 
-  const handleShare = () => {
-    // Implement your share logic here
-    console.log(`Sharing details of ${name}`);
+  const handleShare = async () => {
+    try {
+      
+      console.log('Name:', name);
+      console.log('Details:', details);
+      console.log('Address:', address);
+      console.log('Phone Number:', phoneNumber);
+      console.log('Tags:', tag);
+      console.log('Rating:', rating);
+  
+
+      const handleShare = async () => {
+        try {
+          
+          const message = `Check out ${name || 'Sample Restaurant'} - ${details || 'No details'}\nAddress: ${address || 'No address'}\nPhone: ${phoneNumber || 'No phone'}\nTags: ${tag || 'No tags'}\nRating: ${rating || 'No rating'}`;
+      
+          
+          await Sharing.shareAsync(message);
+        } catch (error) {
+          console.error('Error sharing:', error.message);
+        }
+      };
+      
+    } catch (error) {
+      console.error('Error sharing:', error.message);
+    }
   };
+  
+  
+  
+  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -26,11 +54,11 @@ const DetailRestaurant = ({ route }) => {
         <Text style={styles.detailText}>Phone Number: {phoneNumber}</Text>
         <Text style={styles.detailText}>Address: {address}</Text>
         <Text style={styles.detailText}>Description: {details}</Text>
-        {/* Add more details as needed */}
+        
       </View>
-      {/* Implement your map component here */}
+      
       <View style={styles.mapContainer}>
-        {/* Your map component goes here */}
+        
         <Text>Map Goes Here</Text>
       </View>
       <Button title="Share" onPress={handleShare} />
@@ -65,7 +93,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   mapContainer: {
-    height: 200, // Set the height of your map container
+    height: 200, 
     marginBottom: 20,
     backgroundColor: '#e0e0e0',
     justifyContent: 'center',
