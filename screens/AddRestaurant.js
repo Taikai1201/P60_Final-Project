@@ -74,7 +74,7 @@ export default function AddRestaurant({ navigation }) {
             { label: '4.5', value: '4.5' },
             { label: '4.0', value: '4.0' },
             { label: '3.5', value: '3.5' },
-            { label: '3.0', value: '3.0' },
+            { label: '2.0', value: '3.0' },
             
           ]}
           onValueChange={(value) => setRating(value)}
