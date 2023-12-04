@@ -1,3 +1,4 @@
+//screens/HomeScreen.js
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 

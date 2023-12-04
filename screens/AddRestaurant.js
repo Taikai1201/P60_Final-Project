@@ -1,3 +1,4 @@
+//screens/AddRestaurant.js
 import React, { useState } from 'react';
 import {
   View,
@@ -11,14 +12,17 @@ import {
 import RNPickerSelect from 'react-native-picker-select';
 
 export default function AddRestaurant({ navigation }) {
+  const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState('');
   const [restaurantAddress, setRestaurantAddress] = useState('');
   const [restaurantPhoneNumber, setRestaurantPhoneNumber] = useState('');
   const [restaurantDetails, setRestaurantDetails] = useState('');
   const [restaurantTag, setRestaurantTag] = useState('');
-  const [rating, setRating] = useState('5.0'); 
+  const [rating, setRating] = useState('5.0');
+
   const handleAddRestaurant = () => {
     const newRestaurant = {
+      id: Date.now().toString(), // Unique identifier using timestamp
       name: restaurantName,
       address: restaurantAddress,
       phoneNumber: restaurantPhoneNumber,
@@ -26,7 +30,17 @@ export default function AddRestaurant({ navigation }) {
       tag: restaurantTag,
       rating: rating,
     };
-
+  
+    setRestaurants((prevRestaurants) => [...prevRestaurants, newRestaurant]);
+  
+    // Clear the input fields
+    setRestaurantName('');
+    setRestaurantAddress('');
+    setRestaurantPhoneNumber('');
+    setRestaurantDetails('');
+    setRestaurantTag('');
+    setRating('5.0');
+  
     navigation.navigate('List of your restaurant', { newRestaurant });
   };
 
@@ -52,7 +66,7 @@ export default function AddRestaurant({ navigation }) {
         placeholder="Phone number"
         value={restaurantPhoneNumber}
         onChangeText={(text) => setRestaurantPhoneNumber(text)}
-        keyboardType="phone-pad" 
+        keyboardType="phone-pad"
       />
       <TextInput
         style={styles.input}
@@ -74,8 +88,7 @@ export default function AddRestaurant({ navigation }) {
             { label: '4.5', value: '4.5' },
             { label: '4.0', value: '4.0' },
             { label: '3.5', value: '3.5' },
-            { label: '2.0', value: '3.0' },
-            
+            { label: '3.0', value: '3.0' },
           ]}
           onValueChange={(value) => setRating(value)}
           value={rating}
@@ -86,10 +99,11 @@ export default function AddRestaurant({ navigation }) {
       <TouchableHighlight
         style={styles.addButton}
         onPress={handleAddRestaurant}
-        underlayColor="#4682B4" 
+        underlayColor="#4682B4"
       >
         <Text style={styles.buttonText}>Add Restaurant</Text>
       </TouchableHighlight>
+
     </KeyboardAvoidingView>
   );
 }
@@ -150,10 +164,11 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: '#4682B4',
     marginBottom: 16,
-    borderRadius: 6
+    borderRadius: 6,
   },
   buttonText: {
     textAlign: 'center',
     color: 'white',
   },
 });
+message.txt
